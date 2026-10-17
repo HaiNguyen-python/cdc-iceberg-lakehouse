@@ -1,0 +1,22 @@
+# Manual end-to-end run of the full Docker stack. Kept out of the main CI on purpose: it pulls
+# five images and waits on Debezium, so it is slower and less reliable than the unit tests.
+# Start it from the Actions tab ("e2e" -> "Run workflow") or with `gh workflow run e2e.yml`.
+name: e2e
+
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the stack and run the smoke test
+        run: bash scripts/e2e_smoke.sh
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --tail=200
+      - name: Stop the stack
+        if: always()
+        run: docker compose down -v
