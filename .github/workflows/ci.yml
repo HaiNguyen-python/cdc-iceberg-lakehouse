@@ -21,7 +21,7 @@ jobs:
           ruff format --check .
       - name: Type check
         run: mypy src
-      - name: Tests (local Iceberg: SQLite catalog + filesystem warehouse)
+      - name: "Tests (local Iceberg: SQLite catalog + filesystem warehouse)"
         run: pytest --cov-fail-under=80
 
   docker:
