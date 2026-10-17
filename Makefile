@@ -33,7 +33,7 @@ up:
 	docker compose up -d --build --wait
 
 e2e:
-	scripts/e2e_smoke.sh
+	bash scripts/e2e_smoke.sh
 
 down:
 	docker compose down -v
