@@ -1,0 +1,25 @@
+{
+  "name": "courseplatform-postgres",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "plugin.name": "pgoutput",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "courses",
+    "topic.prefix": "courseplatform",
+    "table.include.list": "public.users,public.courses,public.enrolments,public.payments",
+    "slot.name": "cdc_lake",
+    "publication.name": "cdc_lake_pub",
+    "publication.autocreate.mode": "filtered",
+    "snapshot.mode": "initial",
+    "decimal.handling.mode": "string",
+    "time.precision.mode": "adaptive",
+    "tombstones.on.delete": "true",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}
